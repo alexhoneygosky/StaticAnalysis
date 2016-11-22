@@ -9,15 +9,13 @@ public class Monkey {
 
     private Banana banana = null;
 
-    private List<Integer> allPrimeNums;
-
     /**
      * Get this monkey's number.
      * @return int monkey number
      */
 
     public int getMonkeyNum() {
-	return thisMonkeyNum;
+       return thisMonkeyNum;
     }
 
     /**
@@ -26,11 +24,11 @@ public class Monkey {
      */
 
     public int getId() throws NoIdException {
-	if (id < 0) {
-	    throw new NoIdException();
-	} else {
-	    return id;
-	}
+        if (id < 0) {
+            throw new NoIdException();
+        } else {
+            return id;
+        }
     }
 
     /**
@@ -53,7 +51,7 @@ public class Monkey {
      */
 
     public boolean hasBanana() {
-	return banana != null;
+        return banana != null;
     }
 
     /**
@@ -62,7 +60,7 @@ public class Monkey {
      */
 
     public void throwBananaTo(Banana paramBanana) {
-	banana = paramBanana;
+        banana = paramBanana;
     }
 
     /**
@@ -71,9 +69,9 @@ public class Monkey {
      */
 
     public Banana throwBananaFrom() {
-	Banana toReturn = banana;
-	banana = null;
-	return toReturn;
+        Banana toReturn = banana;
+        banana = null;
+        return toReturn;
     }
 
     /**
@@ -86,7 +84,7 @@ public class Monkey {
      */
 
     public int generateId(int num) {
-	return 223492 + num;
+        return 223492 + num;
     }
 
     /**
@@ -94,8 +92,8 @@ public class Monkey {
      */
 
     public Monkey(int monkeyNum) {
-	thisMonkeyNum = monkeyNum;
-	id = generateId(thisMonkeyNum);
+        thisMonkeyNum = monkeyNum;
+        id = generateId(thisMonkeyNum);
     }
 
 }

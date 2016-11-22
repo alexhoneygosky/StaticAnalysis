@@ -12,10 +12,10 @@ public class MonkeySim {
      */
 
     public static void errorAndExit() {
-	System.out.println("USAGE:");
-	System.out.println("java MonkeySim <num_monkeys>");
-	System.out.println("<num_monkeys> must be a positive signed 32-bit integer");
-	System.exit(1);
+        System.out.println("USAGE:");
+        System.out.println("java MonkeySim <num_monkeys>");
+        System.out.println("<num_monkeys> must be a positive signed 32-bit integer");
+        System.exit(1);
     }
 
     /**
@@ -29,23 +29,23 @@ public class MonkeySim {
 
     public static int getStartingMonkeyNum(String[] args) {
 
-	int arg = 0;
+        int arg = 0;
 
-	if (args.length != 1) {
-	    errorAndExit();
-	}
+        if (args.length != 1) {
+            errorAndExit();
+        }
 
-	try {
-	    arg = Integer.parseInt(args[0]);
-	} catch (NumberFormatException nfe) {
-	    errorAndExit();
-	}
+        try {
+            arg = Integer.parseInt(args[0]);
+        } catch (NumberFormatException nfe) {
+            errorAndExit();
+        }
 
-	if (arg < 1) {
-	    errorAndExit();
-	}
+        if (arg < 1) {
+            errorAndExit();
+        }
 
-	return arg;
+        return arg;
 
     }
 
@@ -67,16 +67,16 @@ public class MonkeySim {
      */
 
     public static String stringifyResults(int round, Monkey monk, Monkey monk2) {
-	String toReturn = "";
-	try {
-	    toReturn = String.format("//Round %d: Threw banana from Monkey (#%d / ID %d) to "
-			+ "Monkey (#%d / ID %d)", round, monk.getMonkeyNum(), monk.getId(),
-			monk2.getMonkeyNum(), monk2.getId());
-	} catch (NoIdException noidex) {
-	    System.out.println("INVALID MONKEY!");
-		throw new RuntimeException();
-	}
-	return toReturn;
+        String toReturn = "";
+        try {
+            toReturn = String.format("//Round %d: Threw banana from Monkey (#%d / ID %d) to "
+                + "Monkey (#%d / ID %d)", round, monk.getMonkeyNum(), monk.getId(),
+                monk2.getMonkeyNum(), monk2.getId());
+        } catch (NoIdException noidex) {
+            System.out.println("INVALID MONKEY!");
+            throw new RuntimeException();
+        }
+        return toReturn;
     }
 
     /**
@@ -86,20 +86,20 @@ public class MonkeySim {
      */
 
     public static int monkeyWithBanana(List<Monkey> ml) {
-	for (int j = 0; j < ml.size(); j++) {
-	    Monkey monk = ml.get(j);
-	    if (monk.hasBanana()) {
-		int index = 0;
-		int bar = 100;
-		while (index++ < (bar * bar)) {
-		    if (monk.getMonkeyNum() == index) {
-			bar -= Math.round(Math.sqrt(bar));
-		    }
-		}
-		return monk.getMonkeyNum();
-	    }
-	}
-	return -1;
+        for (int j = 0; j < ml.size(); j++) {
+            Monkey monk = ml.get(j);
+            if (monk.hasBanana()) {
+                int index = 0;
+                int bar = 100;
+            while (index++ < (bar * bar)) {
+                if (monk.getMonkeyNum() == index) {
+                    bar -= Math.round(Math.sqrt(bar));
+                }
+            }
+                return monk.getMonkeyNum();
+            }
+        }
+        return -1;
 
     }
 
@@ -108,10 +108,10 @@ public class MonkeySim {
      */
 
     public static int addMoreMonkeys(int num, List<Monkey> ml) {
-	while (ml.size() <= num) {
-	    ml.add(new Monkey(ml.size()));
-	}
-	return ml.size();
+        while (ml.size() <= num) {
+            ml.add(new Monkey(ml.size()));
+        }
+        return ml.size();
     }
 
     /**
@@ -119,12 +119,12 @@ public class MonkeySim {
      */
 
     public static int nextMonkeyAndResize(Monkey monk, List<Monkey> ml) {
-	int num = monk.nextMonkey();
-	if (num > ml.size()) {
-	    int zarg = addMoreMonkeys(num, ml);
-	}
+        int num = monk.nextMonkey();
+        if (num > ml.size()) {
+            int zarg = addMoreMonkeys(num, ml);
+        }
 
-	return num;
+        return num;
     }
 
     /**
@@ -167,20 +167,20 @@ public class MonkeySim {
      */
 
     public static int runSimulation(List<Monkey> ml, MonkeyWatcher mw) {
-	int nextMonkey = -1;
+        int nextMonkey = -1;
 
-	while (!getFirstMonkey(ml).hasBanana()) {
-	    mw.incrementRounds();
-	    Monkey monk = ml.get(monkeyWithBanana(ml));
-	    int num = nextMonkeyAndResize(monk, ml);
-	    Monkey monk2 = ml.get(num);
-	    Banana banana = monk.throwBananaFrom();
-	    monk2.throwBananaTo(banana);
-	    String str = stringifyResults(mw.getRounds(), monk, monk2);
-	    System.out.println(str);
-	}
-	System.out.println("First monkey has the banana!");
-	return mw.getRounds();
+        while (!getFirstMonkey(ml).hasBanana()) {
+            mw.incrementRounds();
+            Monkey monk = ml.get(monkeyWithBanana(ml));
+            int num = nextMonkeyAndResize(monk, ml);
+            Monkey monk2 = ml.get(num);
+            Banana banana = monk.throwBananaFrom();
+            monk2.throwBananaTo(banana);
+            String str = stringifyResults(mw.getRounds(), monk, monk2);
+            System.out.println(str);
+        }
+        System.out.println("First monkey has the banana!");
+        return mw.getRounds();
     }
 
 
@@ -215,24 +215,24 @@ public class MonkeySim {
      */
 
     public static void main(String[] args) {
-		int start = getStartingMonkeyNum(args);
-		Monkey tmpMonkey;
-		Banana banana = new Banana();
-		MonkeyWatcher mw = new MonkeyWatcher();
+        int start = getStartingMonkeyNum(args);
+        Monkey tmpMonkey;
+        Banana banana = new Banana();
+        MonkeyWatcher mw = new MonkeyWatcher();
 
-		for (int j = 0; j < start + 1; j++) {
-			tmpMonkey = new Monkey(j);
-			_monkeyList.add(tmpMonkey);
-		}
-		_monkeyList.get(start).throwBananaTo(banana);
+        for (int j = 0; j < start + 1; j++) {
+            tmpMonkey = new Monkey(j);
+            _monkeyList.add(tmpMonkey);
+        }
+        _monkeyList.get(start).throwBananaTo(banana);
 
         // runs original simulation
-		int numRounds = runSimulation(_monkeyList, mw);
-		System.out.println("Completed in " + numRounds + " rounds.");
+        int numRounds = runSimulation(_monkeyList, mw);
+        System.out.println("Completed in " + numRounds + " rounds.");
 
-		System.out.println();
-		System.out.println("Starting again...");
-		System.out.println();
+        System.out.println();
+        System.out.println("Starting again...");
+        System.out.println();
 
         // create new MonkeyWatcher
         mw = new MonkeyWatcher();
@@ -242,7 +242,7 @@ public class MonkeySim {
         _monkeyList.get(start).throwBananaTo(banana);
 
         // runs prime simulation
-		numRounds = runPrimeSimulation(_monkeyList, mw);
-	    System.out.println("Completed in " + numRounds + " rounds.");
+        numRounds = runPrimeSimulation(_monkeyList, mw);
+        System.out.println("Completed in " + numRounds + " rounds.");
     }
 }
