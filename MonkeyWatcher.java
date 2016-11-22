@@ -1,11 +1,9 @@
-import java.util.*;
-
 public class MonkeyWatcher {
 
     private int numRounds = 0;
 
     /**
-     * Return number of rounds played
+     * Return number of rounds played.
      * @return int number of rounds played
      */
     
@@ -14,7 +12,7 @@ public class MonkeyWatcher {
     }
 
     /**
-     * Increment number of rounds
+     * Increment number of rounds.
      */
     
     public void incrementRounds() {

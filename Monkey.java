@@ -1,24 +1,25 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Monkey {
 
-    private int _monkeyNum = 0;
+    private static int monkeyNum = 0;
 
-    private int _thisMonkeyNum = 0;
+    private int thisMonkeyNum = 0;
     
-    private int _id = -1;
+    private int id = -1;
 
-    private Banana _b = null;
+    private Banana banana = null;
 
     private List<Integer> allPrimeNums = new ArrayList<Integer>();
 
     /**
-     * Get this monkey's number
+     * Get this monkey's number.
      * @return int monkey number
      */
     
     public int getMonkeyNum() {
-	return _thisMonkeyNum;
+	return thisMonkeyNum;
     }
     
     /**
@@ -27,10 +28,10 @@ public class Monkey {
      */
     
     public int getId() throws NoIdException {
-	if (_id < 0) {
+	if (id < 0) {
 	    throw new NoIdException();
 	} else {
-	    return _id;
+	    return id;
 	}
     }
 
@@ -41,29 +42,25 @@ public class Monkey {
 
     public int nextMonkey(int iteration) {
 	if (iteration == 1) {
-        if (_thisMonkeyNum % 2 == 0) {
-            return _thisMonkeyNum / 2;
+        if (thisMonkeyNum % 2 == 0) {
+            return thisMonkeyNum / 2;
         } else {
-            return (_thisMonkeyNum * 3) + 1;
+            return (thisMonkeyNum * 3) + 1;
         }
-    }
+    } else {
+        if (allPrimeNums.contains(thisMonkeyNum)) {
+            int tempIndex = allPrimeNums.indexOf(thisMonkeyNum);
 
-    else {
-        if(allPrimeNums.contains(_thisMonkeyNum)) {
-            int tempIndex = allPrimeNums.indexOf(_thisMonkeyNum);
-
-            if(tempIndex == 0) {
+            if (tempIndex == 0) {
                 return 1;
+            } else {
+                return allPrimeNums.get(tempIndex - 1);
             }
-            else {
-                return allPrimeNums.get(tempIndex-1);
-            }
-        }
-        else {
-            int monkeynum = _thisMonkeyNum-1;
+        } else {
+            int monkeynum = thisMonkeyNum - 1;
 
-            while(monkeynum > 1) {
-                if(allPrimeNums.contains(monkeynum)) {
+            while (monkeynum > 1) {
+                if (allPrimeNums.contains(monkeynum)) {
                     return monkeynum;
                 }
                 monkeynum--;
@@ -75,6 +72,9 @@ public class Monkey {
 
     }
 
+    /**
+     * Returns all prime numbers for a given start monkey number.
+     */
     public void prelistAllPrimeNumbers(int monkeynum) {
         int counter = 0;
         for (int i = 2; i <= monkeynum; i++) {
@@ -88,36 +88,34 @@ public class Monkey {
                 allPrimeNums.add(i);
             }
         }
-
-        //System.out.println(allPrimeNums);
     }
 
     /**
-     * Checks to see if this monkey has a banana
-     * @return true if has banana, false otherwise
+     * Checks to see if this monkey has a banana.
+     * @return true if has banana, false otherwise.
      */
     
     public boolean hasBanana() {
-	return _b != null;
+	return banana != null;
     }
 
     /**
-     * Receive a banana from another monkey
-     * @param b - Banana given to this monkey
+     * Receive a banana from another monkey.
+     * @param paramBanana - Banana given to this monkey.
      */
     
-    public void throwBananaTo(Banana b) {
-	_b = b;
+    public void throwBananaTo(Banana paramBanana) {
+	banana = paramBanana;
     }
 
     /**
      * 
-     * @return Banana - the banana this monkey held
+     * @return Banana - the banana this monkey held.
      */
     
     public Banana throwBananaFrom() {
-	Banana toReturn = _b;
-	_b = null;
+	Banana toReturn = banana;
+	banana = null;
 	return toReturn;
     }
     
@@ -127,22 +125,21 @@ public class Monkey {
      * always return the correct value for
      * a given n (i.e., the id for the first
      * monkey should always be the same).
-     * @param int n - monkey number
      * @return int - id for this monkey
      */
     
-    public int generateId(int n) {
-	return 223492 + n;
+    public int generateId(int num) {
+	return 223492 + num;
     }
 
     /**
-     * Monkey constructor
+     * Monkey constructor.
      */
     
     public Monkey() {
-	_thisMonkeyNum = _monkeyNum;
-	_monkeyNum++;
-	_id = generateId(_thisMonkeyNum);
+	thisMonkeyNum = monkeyNum;
+	monkeyNum++;
+	id = generateId(thisMonkeyNum);
     }
     
 }
