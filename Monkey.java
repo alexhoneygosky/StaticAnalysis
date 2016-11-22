@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Monkey {
 
-    private static int monkeyNum = 0;
+    //private static int monkeyNum = 0;
 
     private int thisMonkeyNum = 0;
     
@@ -136,9 +136,9 @@ public class Monkey {
      * Monkey constructor.
      */
     
-    public Monkey() {
-	thisMonkeyNum = monkeyNum;
-	monkeyNum++;
+    public Monkey(int monkeyNumber) {
+	thisMonkeyNum = monkeyNumber;
+	monkeyNumber++;
 	id = generateId(thisMonkeyNum);
     }
     

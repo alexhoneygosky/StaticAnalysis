@@ -10,6 +10,8 @@ public class MonkeySim {
 
 	private static int x = 1;
 
+	private static int monkeyNum = 0;
+
     /**
      * Print out use message and exit with
      * error code 1.
@@ -113,7 +115,7 @@ public class MonkeySim {
 
     public static int addMoreMonkeys(int num, List<Monkey> ml) {
 	while (ml.size() <= num) {
-	    ml.add(new Monkey());
+	    ml.add(new Monkey(monkeyNum));
 	}
 	return ml.size();
     }
@@ -169,7 +171,7 @@ public class MonkeySim {
 		MonkeyWatcher mw = new MonkeyWatcher();
 
 		for (int j = 0; j < start + 1; j++) {
-			tmpMonkey = new Monkey();
+			tmpMonkey = new Monkey(monkeyNum);
 			tmpMonkey.prelistAllPrimeNumbers(Integer.parseInt(args[0]));
 			_monkeyList.add(tmpMonkey);
 		}
