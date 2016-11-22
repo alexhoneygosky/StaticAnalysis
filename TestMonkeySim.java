@@ -174,5 +174,4 @@ public class TestMonkeySim {
         assertArrayEquals(expected, observed);
     }
 
-
 }
