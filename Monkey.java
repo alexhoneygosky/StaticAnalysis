@@ -8,7 +8,7 @@ public class Monkey {
     private int id = -1;
 
     private Banana banana = null;
-    
+
     /**
      * Get this monkey's number.
      * @return int monkey number
