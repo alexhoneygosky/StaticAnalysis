@@ -226,7 +226,7 @@ public class MonkeySim {
 		}
 		_monkeyList.get(start).throwBananaTo(banana);
 
-        // runs original simulation
+  // runs original simulation
 		int numRounds = runSimulation(_monkeyList, mw);
 		System.out.println("Completed in " + numRounds + " rounds.");
 
@@ -241,7 +241,7 @@ public class MonkeySim {
         banana = _monkeyList.get(1).throwBananaFrom();
         _monkeyList.get(start).throwBananaTo(banana);
 
-        // runs prime simulation
+  // runs prime simulation
 		numRounds = runPrimeSimulation(_monkeyList, mw);
 	    System.out.println("Completed in " + numRounds + " rounds.");
     }
