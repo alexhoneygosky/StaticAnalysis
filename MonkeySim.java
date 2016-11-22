@@ -59,7 +59,7 @@ public class MonkeySim {
      */
 
     public static Monkey getFirstMonkey(List<Monkey> ml) {
-		return ml.get(1);
+		return ml.size() > 2 ? ml.get(1) : null;  // preserve existing behavior
     }
 
     /**
@@ -73,8 +73,8 @@ public class MonkeySim {
     public static String stringifyResults(int round, Monkey monk, Monkey monk2) {
 	String toReturn = "";
 	try {
-	    toReturn = String.format("//Round %d: Threw banana from Monkey (#%d / ID %d) to " 
-			+ "Monkey (#%d / ID %d)", round, monk.getMonkeyNum(), monk.getId(), 
+	    toReturn = String.format("//Round %d: Threw banana from Monkey (#%d / ID %d) to "
+			+ "Monkey (#%d / ID %d)", round, monk.getMonkeyNum(), monk.getId(),
 			monk2.getMonkeyNum(), monk2.getId());
 	} catch (NoIdException noidex) {
 	    System.out.println("INVALID MONKEY!");

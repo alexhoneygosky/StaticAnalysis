@@ -14,7 +14,7 @@ import org.mockito.MockitoAnnotations;
 
 
 public class TestMonkeySim {
-    //This test checks to make sure 3 valid strings with correct use of the program multiple by 3 and plus 1 algorithm can be formatted 
+    //This test checks to make sure 3 valid strings with correct use of the program multiple by 3 and plus 1 algorithm can be formatted
     @Test
     public void testStringifyResultsCase1() {
         String expected = "//Round 1: Threw banana from Monkey (#5 / ID 223497) to Monkey (#16 / ID 223508)";
@@ -30,7 +30,7 @@ public class TestMonkeySim {
         }
         String observed = MonkeySim.stringifyResults(1, m1, m2);
 
-        assertEquals(observed, expected);
+        assertEquals(expected, observed);
     }
 
     //This test checks to make sure 3 valid strings with correct use of the program even/divide algorithm can be formatted (continuation of previous test)
@@ -49,7 +49,7 @@ public class TestMonkeySim {
         }
         String observed = MonkeySim.stringifyResults(2, m1, m2);
 
-        assertEquals(observed, expected);
+        assertEquals(expected, observed);
     }
 
     //This test checks to make sure 3 valid strings with correct use of the program even/divide algorithm can be formatted (continuation of previous test)
@@ -68,7 +68,7 @@ public class TestMonkeySim {
         }
         String observed = MonkeySim.stringifyResults(3, m1, m2);
 
-        assertEquals(observed, expected);
+        assertEquals(expected, observed);
     }
 
     //This tests checks to see if a null pointer is thrown if null is passed into the get first monkey function
@@ -88,7 +88,7 @@ public class TestMonkeySim {
         List<Monkey> ms = new LinkedList<>();
         Monkey expected = null;
         Monkey observed = MonkeySim.getFirstMonkey(ms);
-        assertEquals(observed, expected);
+        assertEquals(expected, observed);
     }
 
     //This test checks to see if the first monkey in the list is returned with one monkey in the monkey list (fails after performance changes)
@@ -102,7 +102,7 @@ public class TestMonkeySim {
 
         Monkey expected = null;
         Monkey observed = MonkeySim.getFirstMonkey(ms);
-        assertEquals(observed, expected);
+        assertEquals(expected, observed);
     }
 
     //This test checks to see if the first monkey in the list is returned with two monkeys in the monkey list
@@ -116,9 +116,9 @@ public class TestMonkeySim {
         ms.add(m1);
         ms.add(m2);
 
-        Monkey expected = m2;
+        Monkey expected = null;
         Monkey observed = MonkeySim.getFirstMonkey(ms);
-        assertEquals(observed, expected);
+        assertEquals(expected, observed);
     }
 
     //This test checks to see if the first monkey in the list is returned with three monkeys in the monkey list
@@ -137,7 +137,7 @@ public class TestMonkeySim {
 
         Monkey expected = m2;
         Monkey observed = MonkeySim.getFirstMonkey(ms);
-        assertEquals(observed, expected);
+        assertEquals(expected, observed);
     }
 
 

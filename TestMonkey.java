@@ -21,7 +21,7 @@ public class TestMonkey {
         int n = 1;
         int expected = n + offset;
         int observed = new Monkey().generateId(n);
-        assertEquals(observed, expected);
+        assertEquals(expected, observed);
     }
 
     //This test checks to see that the corrected generated id is returned when a valid, bigger int is passed in
@@ -31,7 +31,7 @@ public class TestMonkey {
         int n = 484;
         int expected = n + offset;
         int observed = new Monkey().generateId(n);
-        assertEquals(observed, expected);
+        assertEquals(expected, observed);
     }
 
     //This test checks to see that the corrected generated id is returned when a valid, even bigger int is passed in
@@ -41,7 +41,7 @@ public class TestMonkey {
         int n = 1300;
         int expected = n + offset;
         int observed = new Monkey().generateId(n);
-        assertEquals(observed, expected);
+        assertEquals(expected, observed);
     }
 
 }
