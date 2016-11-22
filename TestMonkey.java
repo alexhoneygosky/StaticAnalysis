@@ -47,4 +47,22 @@ public class TestMonkey {
         assertEquals(expected, observed);
     }
 
+    //This test the monkey constructor with monkey number of 0
+    @Test
+    public void testMonkey0() {
+        int expected = 0;
+
+        int observed = new Monkey(0).getMonkeyNum();
+        assertEquals(expected, observed);
+    }
+
+    //This test the monkey constructor with monkey number of 0
+    @Test
+    public void testMonkey42() {
+        int expected = 42;
+
+        int observed = new Monkey(42).getMonkeyNum();
+        assertEquals(expected, observed);
+    }
+
 }
