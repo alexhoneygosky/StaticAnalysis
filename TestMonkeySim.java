@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import static org.mockito.Mockito.times;
 
 
 
@@ -93,10 +94,10 @@ public class TestMonkeySim {
     //This test checks to see if null is returned with one monkey in the list
     @Test
     public void testGetFirstMonkeySingleton() {
-        Monkey m1 = Mockito.mock(Monkey.class);
-        Mockito.when(m1.getMonkeyNum()).thenReturn(0);
+        Monkey m0 = Mockito.mock(Monkey.class);
+        Mockito.when(m0.getMonkeyNum()).thenReturn(0);
         List<Monkey> ms = new LinkedList<>();
-        ms.add(m1);
+        ms.add(m0);
 
         Monkey expected = null;
         Monkey observed = MonkeySim.getFirstMonkey(ms);
@@ -106,13 +107,13 @@ public class TestMonkeySim {
     //This test checks to see if null is returned with two monkeys in the list
     @Test
     public void testGetFirstMonkeyTwoElements() {
+        Monkey m0 = Mockito.mock(Monkey.class);
         Monkey m1 = Mockito.mock(Monkey.class);
-        Monkey m2 = Mockito.mock(Monkey.class);
-        Mockito.when(m1.getMonkeyNum()).thenReturn(0);
-        Mockito.when(m2.getMonkeyNum()).thenReturn(1);
+        Mockito.when(m0.getMonkeyNum()).thenReturn(0);
+        Mockito.when(m1.getMonkeyNum()).thenReturn(1);
         List<Monkey> ms = new LinkedList<>();
+        ms.add(m0);
         ms.add(m1);
-        ms.add(m2);
 
         Monkey expected = null;
         Monkey observed = MonkeySim.getFirstMonkey(ms);
@@ -122,18 +123,18 @@ public class TestMonkeySim {
     //This test checks to see if the first monkey in the list is returned with three monkeys in the monkey list
     @Test
     public void testGetFirstMonkeyThreeElements() {
+        Monkey m0 = Mockito.mock(Monkey.class);
         Monkey m1 = Mockito.mock(Monkey.class);
         Monkey m2 = Mockito.mock(Monkey.class);
-        Monkey m3 = Mockito.mock(Monkey.class);
-        Mockito.when(m1.getMonkeyNum()).thenReturn(0);
-        Mockito.when(m2.getMonkeyNum()).thenReturn(1);
-        Mockito.when(m3.getMonkeyNum()).thenReturn(2);
+        Mockito.when(m0.getMonkeyNum()).thenReturn(0);
+        Mockito.when(m1.getMonkeyNum()).thenReturn(1);
+        Mockito.when(m2.getMonkeyNum()).thenReturn(2);
         List<Monkey> ms = new LinkedList<>();
+        ms.add(m0);
         ms.add(m1);
         ms.add(m2);
-        ms.add(m3);
 
-        Monkey expected = m2;
+        Monkey expected = m1;
         Monkey observed = MonkeySim.getFirstMonkey(ms);
         assertEquals(expected, observed);
     }
@@ -172,6 +173,40 @@ public class TestMonkeySim {
         Object[] observed = seq.toArray();
         Object[] expected = {1};
         assertArrayEquals(expected, observed);
+    }
+
+    //This test checks the prime simulation with starting monkey number of 2
+    @Test
+    public void testPrimeSim2() {
+        List<Monkey> ml = new LinkedList<>();
+        for (int i = 0; i <= 2; i++) {
+            Monkey m = Mockito.mock(Monkey.class);
+            Mockito.when(m.getMonkeyNum()).thenReturn(i);
+            ml.add(m);
+        }
+        MonkeyWatcher mw = Mockito.mock(MonkeyWatcher.class);
+        Mockito.when(ml.get(2).hasBanana()).thenReturn(true);
+
+        MonkeySim.runPrimeSimulation(ml, mw);
+
+        Mockito.verify(mw, times(1)).incrementRounds();
+    }
+
+    //This test checks the prime simulation with starting monkey number of 100
+    @Test
+    public void testPrimeSim100() {
+        List<Monkey> ml = new LinkedList<>();
+        for (int i = 0; i <= 100; i++) {
+            Monkey m = Mockito.mock(Monkey.class);
+            Mockito.when(m.getMonkeyNum()).thenReturn(i);
+            ml.add(m);
+        }
+        MonkeyWatcher mw = Mockito.mock(MonkeyWatcher.class);
+        Mockito.when(ml.get(100).hasBanana()).thenReturn(true);
+
+        MonkeySim.runPrimeSimulation(ml, mw);
+
+        Mockito.verify(mw, times(26)).incrementRounds();
     }
 
 }
