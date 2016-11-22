@@ -6,10 +6,6 @@ public class MonkeySim {
 
     private static List<Monkey> _monkeyList = new LinkedList<Monkey>();
 
-    public static final int HEADER = 50000;
-
-	private static int x = 1;
-
     /**
      * Print out use message and exit with
      * error code 1.
@@ -59,7 +55,7 @@ public class MonkeySim {
      */
 
     public static Monkey getFirstMonkey(List<Monkey> ml) {
-		return ml.size() > 2 ? ml.get(1) : null;  // preserve existing behavior
+        return ml.size() > 2 ? ml.get(1) : null;  // preserve existing behavior
     }
 
     /**
@@ -113,7 +109,7 @@ public class MonkeySim {
 
     public static int addMoreMonkeys(int num, List<Monkey> ml) {
 	while (ml.size() <= num) {
-	    ml.add(new Monkey());
+	    ml.add(new Monkey(ml.size()));
 	}
 	return ml.size();
     }
@@ -123,12 +119,44 @@ public class MonkeySim {
      */
 
     public static int nextMonkeyAndResize(Monkey monk, List<Monkey> ml) {
-	int num = monk.nextMonkey(x);
+	int num = monk.nextMonkey();
 	if (num > ml.size()) {
 	    int zarg = addMoreMonkeys(num, ml);
 	}
 
 	return num;
+    }
+
+    /**
+     * Returns prime monkey sequence given start monkey number.
+     */
+    public static List<Integer> primeSequence(int mn) {
+        List<Integer> seq = new ArrayList<>();
+
+        // standard Sieve of Eratosthenes
+        boolean[] isPrime = new boolean[mn + 1];
+
+        for (int i = 2; i <= mn; i++) {
+            isPrime[i] = true;
+        }
+
+        for (int i = 2; i * i <= mn; i++) {
+            if (isPrime[i]) {
+                for (int j = i * i; j <= mn; j += i) {
+                    isPrime[j] = false;
+                }
+            }
+        }
+
+        // ensure sequence begins with mn and ends with 1
+        isPrime[mn] = isPrime[1] = true;
+        for (int i = mn; i >= 1; i--) {
+            if (isPrime[i]) {
+                seq.add(i);
+            }
+        }
+
+        return seq;
     }
 
     /**
@@ -155,6 +183,30 @@ public class MonkeySim {
 	return mw.getRounds();
     }
 
+
+    /**
+     * Run the simulation with prime sequence.
+     * @param ml List of Monkeys
+     * @param mw watcher of monkey
+     * @return int number of rounds taken to get to first monkey
+     */
+
+    public static int runPrimeSimulation(List<Monkey> ml, MonkeyWatcher mw) {
+        List<Integer> seq = primeSequence(ml.get(monkeyWithBanana(ml)).getMonkeyNum());
+
+        for (int i = 0; i < seq.size() - 1; i++) {
+            mw.incrementRounds();
+            Monkey monk = ml.get(seq.get(i));
+            Monkey monk2 = ml.get(seq.get(i + 1));
+            Banana banana = monk.throwBananaFrom();
+            monk2.throwBananaTo(banana);
+            String str = stringifyResults(mw.getRounds(), monk, monk2);
+            System.out.println(str);
+        }
+        System.out.println("First monkey has the banana!");
+        return mw.getRounds();
+    }
+
     /**
      * Entry point of program - run MonkeySim.
      * Accepts one argument, the starting monkey
@@ -169,20 +221,18 @@ public class MonkeySim {
 		MonkeyWatcher mw = new MonkeyWatcher();
 
 		for (int j = 0; j < start + 1; j++) {
-			tmpMonkey = new Monkey();
-			tmpMonkey.prelistAllPrimeNumbers(Integer.parseInt(args[0]));
+			tmpMonkey = new Monkey(j);
 			_monkeyList.add(tmpMonkey);
 		}
 		_monkeyList.get(start).throwBananaTo(banana);
 
+        // runs original simulation
 		int numRounds = runSimulation(_monkeyList, mw);
 		System.out.println("Completed in " + numRounds + " rounds.");
 
 		System.out.println();
 		System.out.println("Starting again...");
 		System.out.println();
-
-        x++;
 
         // create new MonkeyWatcher
         mw = new MonkeyWatcher();
@@ -191,7 +241,8 @@ public class MonkeySim {
         banana = _monkeyList.get(1).throwBananaFrom();
         _monkeyList.get(start).throwBananaTo(banana);
 
-		numRounds = runSimulation(_monkeyList, mw);
+        // runs prime simulation
+		numRounds = runPrimeSimulation(_monkeyList, mw);
 	    System.out.println("Completed in " + numRounds + " rounds.");
     }
 }
