@@ -57,7 +57,7 @@ public class MonkeySim {
      */
 
     public static Monkey getFirstMonkey(List<Monkey> ml) {
-		return ml.get(1);		
+		return ml.get(1);
     }
 
     /**
@@ -151,46 +151,35 @@ public class MonkeySim {
      */
 
     public static void main(String[] args) {
-	while (x <= 2) {
-		if (x == 1) {
-			int s = getStartingMonkeyNum(args);
-			Monkey tmpMonkey;	
-			Banana b = new Banana();
-			MonkeyWatcher mw = new MonkeyWatcher();
+		int s = getStartingMonkeyNum(args);
+		Monkey tmpMonkey;
+		Banana b = new Banana();
+		MonkeyWatcher mw = new MonkeyWatcher();
 
-			for (int j = 0; j < s + 1; j++) {
-				tmpMonkey = new Monkey();
-				tmpMonkey.prelistAllPrimeNumbers(Integer.parseInt(args[0]));
-				_monkeyList.add(tmpMonkey);
-			}
-			_monkeyList.get(s).throwBananaTo(b);
-
-			int numRounds = runSimulation(_monkeyList, mw);
-			System.out.println("Completed in " + numRounds + " rounds.");
+		for (int j = 0; j < s + 1; j++) {
+			tmpMonkey = new Monkey();
+			tmpMonkey.prelistAllPrimeNumbers(Integer.parseInt(args[0]));
+			_monkeyList.add(tmpMonkey);
 		}
+		_monkeyList.get(s).throwBananaTo(b);
 
-		else {
-			System.out.println();
-			System.out.println("Starting again...");
-			System.out.println();
+		int numRounds = runSimulation(_monkeyList, mw);
+		System.out.println("Completed in " + numRounds + " rounds.");
 
-			int s = getStartingMonkeyNum(args);
-			Monkey tmpMonkey;	
-			Banana b = new Banana();
-			MonkeyWatcher mw = new MonkeyWatcher();
+		System.out.println();
+		System.out.println("Starting again...");
+		System.out.println();
 
-			for (int j = 0; j < s + 1; j++) {
-				tmpMonkey = new Monkey();
-				tmpMonkey.prelistAllPrimeNumbers(Integer.parseInt(args[0]));
-				_monkeyList.add(tmpMonkey);
-			}
-			_monkeyList.get(s).throwBananaTo(b);
+        x++;
 
-			int numRounds = runSimulation(_monkeyList, mw);
-			System.out.println("Completed in " + numRounds + " rounds.");			
-		}
+        // create new MonkeyWatcher
+        mw = new MonkeyWatcher();
 
-		x++;		
-	}
+        // pass banana from first monkey to starting monkey
+        b = _monkeyList.get(1).throwBananaFrom();
+        _monkeyList.get(s).throwBananaTo(b);
+
+		numRounds = runSimulation(_monkeyList, mw);
+	    System.out.println("Completed in " + numRounds + " rounds.");
     }
 }
