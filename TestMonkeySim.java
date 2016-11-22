@@ -76,7 +76,7 @@ public class TestMonkeySim {
     @Test
     public void testGetFirstMonkeyNull() {
         try {
-            MonkeySim.getFirstMonkey(null);
+            Monkey firstMonkey = MonkeySim.getFirstMonkey(null);
             fail();
         } catch (NullPointerException npe) {
             assertTrue(true);
