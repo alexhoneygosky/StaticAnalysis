@@ -9,8 +9,6 @@ public class Monkey {
 
     private Banana banana = null;
 
-    private List<Integer> allPrimeNums;
-
     /**
      * Get this monkey's number.
      * @return int monkey number
