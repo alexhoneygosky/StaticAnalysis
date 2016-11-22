@@ -20,6 +20,7 @@ public class TestMonkey {
         int offset = 223492;
         int n = 1;
         int expected = n + offset;
+
         int observed = new Monkey(n).generateId(n);
         assertEquals(expected, observed);
     }
@@ -30,6 +31,7 @@ public class TestMonkey {
         int offset = 223492;
         int n = 484;
         int expected = n + offset;
+
         int observed = new Monkey(n).generateId(n);
         assertEquals(expected, observed);
     }
@@ -40,6 +42,7 @@ public class TestMonkey {
         int offset = 223492;
         int n = 1300;
         int expected = n + offset;
+
         int observed = new Monkey(n).generateId(n);
         assertEquals(expected, observed);
     }
