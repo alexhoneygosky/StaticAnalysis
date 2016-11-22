@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Monkey {
 
-    private static int _monkeyNum = 0;
+    private int _monkeyNum = 0;
 
     private int _thisMonkeyNum = 0;
     
@@ -40,7 +40,6 @@ public class Monkey {
      */
 
     public int nextMonkey(int iteration) {
-        System.out.println("iteration" + iteration);
 	if (iteration == 1) {
         if (_thisMonkeyNum % 2 == 0) {
             return _thisMonkeyNum / 2;

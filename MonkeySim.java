@@ -6,7 +6,7 @@ public class MonkeySim {
 
     public static final int HEADER = 50000;
 
-	public static int x = 1;
+	private static int x = 1;
 
     /**
      * Print out use message and exit with
@@ -68,13 +68,12 @@ public class MonkeySim {
      * @return String string version of round
      */
 
-    public static String stringifyResults(int c, Monkey m, Monkey m2) {
+    public static String stringifyResults(int c, Monkey m, Monkey m2) throws RuntimeException {
 	String toReturn = "";
 	try {
 	    toReturn = String.format("//Round %d: Threw banana from Monkey (#%d / ID %d) to Monkey (#%d / ID %d)", c, m.getMonkeyNum(), m.getId(), m2.getMonkeyNum(), m2.getId());
 	} catch (NoIdException noidex) {
 	    System.out.println("INVALID MONKEY!");
-	    System.exit(2);
 	}
 	return toReturn;
     }
